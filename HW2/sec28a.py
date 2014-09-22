@@ -15,33 +15,32 @@ import scipy.integrate as integrate
 
 
 #args for linspace
-xmin = 0.
+xmin = -5
 xmax = 10.
 xn = 32
 
-tmin = xmin
-tmax = xmax
+tmin = 0
+tmax = 2*xmax
 
 #the grid for the plot
-x = np.linspace(xmin, xmax,xn) #the x-axis
-t = np.linspace(0, 2*xmax,xn) #the t-axis
+x = np.linspace(xmin, xmax, xn) #the x-axis
+t = np.linspace(tmin, tmax, xn) #the t-axis
 XX, YY = np.meshgrid(t, x) 
 
     
 def f(x,t): return x #f(x)=x
 
-x0 = [0.,.1,.5,1.,1.5] #The initial conditions
+x0 = [-1.,0.,.1,.5,1.,1.5] #The initial conditions
 F = integrate.odeint(f,x0, t) #The solution of f(x)
 dx = x #x'=x
-dt = np.ones(32) 
+dt = np.ones(xn) 
 r = (dx**2 + dt**2)**0.5; #use to normalize the vectors
 pt = dt/r
 px = dx/r
 
-def main(): 
+def plot1(): 
     
-    #plot the solution
-    plt.plot(dx, F)
+    plt.figure(2)
     
     #plot the vector field
     plt.quiver(XX, YY, pt, px)
@@ -49,15 +48,36 @@ def main():
     #plot labels
     plt.xlabel('$t$')
     plt.ylabel('$x$')
-    plt.title('The direction field of $f(x)=x$ and its solution')
+    plt.title('The direction field of $f(x)=x$')
     
     #plot limits
     plt.xlim([tmin, tmax])
-    plt.ylim([tmin, tmax])
+    plt.ylim([xmin, xmax])
+    
+    plt.show()
+    #plt.savefig('figures/Sec2_8aSlope.jpg')
    
+   
+
+def plot2():
+    plt.figure(1)
+    
+    #plot the solution
+    plt.plot(t, F)
+    
+    #plot labels
+    plt.xlabel('$t$')
+    plt.ylabel('$x$')
+    plt.title('$\dot{x}=x$ and its solution')
+    
+    #plot limits
+    plt.xlim([tmin, tmax])
+    plt.ylim([xmin, xmax])
+    
     #save the figure as a jpg file
-    plt.savefig('figures/Sec2_8.jpg')
+    plt.plot()
+    #plt.savefig('figures/Sec2_8aVec.jpg')
 
-main()
 
+plot1(); plot2();
 
