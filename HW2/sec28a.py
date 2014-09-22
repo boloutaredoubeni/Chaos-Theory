@@ -55,8 +55,8 @@ def main():
     plt.xlim([tmin, tmax])
     plt.ylim([tmin, tmax])
    
-    #save the figure as a pdf file
-    plt.savefig('figures/Sec2_8.pdf')
+    #save the figure as a jpg file
+    plt.savefig('figures/Sec2_8.jpg')
 
 main()
 
